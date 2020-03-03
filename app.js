@@ -4,7 +4,7 @@ function onReady() {
 
   const addToDoForm = document.getElementById('addToDoForm');
 
-  function createNewTodo() = {
+  function createNewTodo() {
     const newToDoText = document.getElementById('newToDoText');
 
     if(!newToDoText.value) { return; }
