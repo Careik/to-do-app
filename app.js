@@ -1,4 +1,3 @@
-//OnReady Function
 // OnReady Function
 function onReady() {
   let toDos = [];
@@ -35,21 +34,27 @@ function onReady() {
       deleteBtn.textContent = "Delete";
       checkbox.type = "checkbox";
 
+      //Save ToDo -- Toggle opposite value
+      checkbox.addEventListener("click", function () {
+        toDo.complete = !toDo.complete;
+
+        let str = JSON.stringify(toDos);
+        localStorage.setItem('todos', str);
+
+
+
+      toDos();
+
+      });
+
       deleteBtn.addEventListener('click', event => {
         toDos = toDos.filter(function(item) {
           return item.id !== toDo.id;
+
+
         })
         renderTheUI();
       });
-
-      //LOCAL STORAGE
-      checkbox.addEventListener('click', item => {
-        if (item.complete === false) {
-          item.complete === true;
-        } else if (item.complete === true) {
-          item.complete === false;
-        }
-      })
 
       newLi.textContent = toDo.title;
 
@@ -66,6 +71,8 @@ function onReady() {
 
   renderTheUI();
 }
+
+
 
 window.onload = function() {
   onReady();
