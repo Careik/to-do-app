@@ -1,6 +1,8 @@
 //OnReady Function
+// OnReady Function
 function onReady() {
   let toDos = [];
+  let id = 0;
 
   const addToDoForm = document.getElementById('addToDoForm');
 
@@ -11,9 +13,11 @@ function onReady() {
 
     toDos.push({
       title: newToDoText.value,
-      complete: false
+      complete: false,
+      id: id
     });
-    newToDoText.value = '';
+    newToDoText.value = "";
+    id++
 
     renderTheUI();
   }
@@ -27,12 +31,31 @@ function onReady() {
     toDos.forEach(function(toDo) {
       const newLi = document.createElement('li');
       const checkbox = document.createElement('input');
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = "Delete";
       checkbox.type = "checkbox";
+
+      deleteBtn.addEventListener('click', event => {
+        toDos = toDos.filter(function(item) {
+          return item.id !== toDo.id;
+        })
+        renderTheUI();
+      });
+
+      //LOCAL STORAGE
+      checkbox.addEventListener('click', item => {
+        if (item.complete === false) {
+          item.complete === true;
+        } else if (item.complete === true) {
+          item.complete === false;
+        }
+      })
 
       newLi.textContent = toDo.title;
 
       toDoList.appendChild(newLi);
       newLi.appendChild(checkbox);
+      newLi.appendChild(deleteBtn);
   });
 }
 
